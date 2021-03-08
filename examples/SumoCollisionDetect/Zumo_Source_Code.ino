@@ -1,39 +1,3 @@
-/* This example uses the Zumo Shield's onboard accelerometer to detect contact with an adversary robot
- * in the sumo ring.
- *
- * This example extends the BorderDetect example, which makes use of the onboard Zumo Reflectance Sensor Array
- * and its associated library to detect the border of the sumo ring.  It also illustrates the use of
- * ZumoMotors, PushButton, and ZumoBuzzer.
- *
- * In loop(), the program reads the x and y components of acceleration (ignoring z), and detects a
- * contact when the magnitude of the 3-period average of the x-y vector exceeds an empirically determined
- * XY_ACCELERATION_THRESHOLD.  On contact detection, the forward speed is increased to FULL_SPEED from
- * the default SEARCH_SPEED, simulating a "fight or flight" response.
- *
- * The program attempts to detect contact only when the Zumo is going straight.  When it is executing a
- * turn at the sumo ring border, the turn itself generates an acceleration in the x-y plane, so the
- * acceleration reading at that time is difficult to interpret for contact detection.  Since the Zumo also
- * accelerates forward out of a turn, the acceleration readings are also ignored for MIN_DELAY_AFTER_TURN
- * milliseconds after completing a turn. To further avoid false positives, a MIN_DELAY_BETWEEN_CONTACTS is
- * also specified.
- *
- * This example also contains the following enhancements:
- *
- *  - uses the Zumo Buzzer library to play a sound effect ("charge" melody) at start of competition and
- *    whenever contact is made with an opposing robot
- *
- *  - randomizes the turn angle on border detection, so that the Zumo executes a more effective search pattern
- *
- *  - supports a FULL_SPEED_DURATION_LIMIT, allowing the robot to switch to a SUSTAINED_SPEED after a short
- *    period of forward movement at FULL_SPEED.  In the example, both speeds are set to 400 (max), but this
- *    feature may be useful to prevent runoffs at the turns if the sumo ring surface is unusually smooth.
- *
- *  - logging of accelerometer output to the serial monitor when LOG_SERIAL is #defined.
- *
- *  This example also makes use of the public domain RunningAverage library from the Arduino website; the relevant
- *  code has been copied into this .ino file and does not need to be downloaded separately.
- */
-
 #include <Wire.h>
 #include <ZumoShield.h>
 
